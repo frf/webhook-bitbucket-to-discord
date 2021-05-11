@@ -24,8 +24,8 @@ class SendMessageWebhookAction
     {
         $cacheKey = 'webhook:message:'.md5($id);
 
-//        return Cache::tags(['webhook_message'])
-//            ->remember($cacheKey, 240, function () {
+        return Cache::tags(['webhook_message'])
+            ->remember($cacheKey, 240, function () use ($id) {
                 $webhook = $this->webhookRepository->findByHash($id);
 
                 Log::info('webhook', request()->all());
@@ -35,6 +35,6 @@ class SendMessageWebhookAction
                 }
 
                 return WebhookResource::make($webhook);
-//        });
+        });
     }
 }

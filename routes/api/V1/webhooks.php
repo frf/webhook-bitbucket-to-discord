@@ -18,7 +18,7 @@ Route::prefix('webhooks')->middleware(['auth:api','user_context'])
         Route::patch('/{webhook:id}', [WebhookController::class, 'update'])
             ->name('webhooks.update')
             ->where('id', '[0-9]+');
-
-        Route::post('/webhook-message/{id}', [WebhookController::class, 'webhookMessage'])
-            ->name('webhooks.webhookMessage');
 });
+
+Route::post('/webhook-message/{id}', [WebhookController::class, 'webhookMessage'])
+    ->name('webhooks.webhookMessage');
