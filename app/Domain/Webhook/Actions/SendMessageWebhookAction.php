@@ -29,7 +29,7 @@ class SendMessageWebhookAction
         $cacheKey = 'webhook:message:'.md5($id);
 
         return Cache::tags(['webhook_message'])
-            ->remember($cacheKey, 1, function () use ($id) {
+            ->remember($cacheKey, 3600, function () use ($id) {
                 $webhook = $this->webhookRepository->findByHash($id);
 
                 if (!$webhook) {
