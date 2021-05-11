@@ -13,6 +13,8 @@
         "darkaonline/l5-swagger": "^8.0",
         "doctrine/dbal": "^2.11",
         "fideloper/proxy": "^4.2",
+        "frf/discord-notification": "^1.0",
+        "fzaninotto/faker": "^1.9.1",
         "guzzlehttp/guzzle": "^7.0.1",
         "kriswallsmith/buzz": "^1.2",
         "laravel/framework": "^8.0",
@@ -28,8 +30,7 @@
         "spatie/laravel-query-builder": "^3.2",
         "spatie/laravel-queueable-action": "^2.8",
         "spatie/laravel-tags": "^3.0",
-        "vladimir-yuldashev/laravel-queue-rabbitmq": "^11.1",
-        "fzaninotto/faker": "^1.9.1"
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^11.1"
     },
     "require-dev": {
         "deployer/deployer": "^6.8",
