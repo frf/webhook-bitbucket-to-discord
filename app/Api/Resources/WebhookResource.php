@@ -15,6 +15,7 @@ class WebhookResource extends JsonResource
         /** @var WebhookBag $this */
         return [
 //            'id' => $this->getKey(),
+            'key' => $this->webhook_hash,
             'webhook' => Webhook::URL_WEBHOOK . $this->webhook_hash,
             'content' => $this->content,
             'application' => $this->application,
