@@ -1,0 +1,34 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Select Application",
+        "contact": "your@email.com",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/v1",
+            "description": "Api Select Develop"
+        }
+    ],
+    "paths": {
+        "/products": {
+            "get": {
+                "tags": [
+                    "product"
+                ],
+                "summary": "Returns a list of products",
+                "description": "Returns a object of products",
+                "operationId": "App\\Api\\Controllers\\ProductController::index",
+                "responses": {
+                    "200": {
+                        "description": "A list with products"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

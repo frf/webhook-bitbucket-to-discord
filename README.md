@@ -2,16 +2,16 @@
 </h4>
 
 <p align="center">
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/frf/api-dev4u.svg">
-  <a href="https://github.com/frf/api-dev4u/commits/master">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/frf/api-dev4u.svg">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/frf/webhook-bitbucket-to-discord.svg">
+  <a href="https://github.com/frf/webhook-bitbucket-to-discord/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/frf/webhook-bitbucket-to-discord.svg">
   </a>
 
-  <a href="https://github.com/frf/api-dev4u/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/frf/api-dev4u.svg">
+  <a href="https://github.com/frf/webhook-bitbucket-to-discord/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/frf/webhook-bitbucket-to-discord.svg">
   </a>
 
-  <img alt="GitHub" src="https://img.shields.io/github/license/frf/api-dev4u.svg">
+  <img alt="GitHub" src="https://img.shields.io/github/license/frf/webhook-bitbucket-to-discord.svg">
 </p>
 
 <p align="center">
@@ -26,7 +26,7 @@ This project was developed with the following technologies:
 
 ## :memo: License
 
-This project is under the MIT license. See the [LICENSE](https://github.com/frf/api-dev4u/blob/master/LICENSE) for more information.
+This project is under the MIT license. See the [LICENSE](https://github.com/frf/webhook-bitbucket-to-discord/blob/master/LICENSE) for more information.
 
 ---
 
