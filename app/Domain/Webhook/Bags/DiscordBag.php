@@ -4,6 +4,7 @@ namespace Domain\Webhook\Bags;
 
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
+use Psy\Util\Json;
 
 /**
  * Class UserBag
@@ -31,6 +32,11 @@ class DiscordBag
     public function attributes(): array
     {
         return $this->attributes;
+    }
+
+    public function jsonAttributes()
+    {
+        return (is_array($this->attributes)) ? json_encode($this->attributes) : null;
     }
 
     public static function fromRequest($attributes)

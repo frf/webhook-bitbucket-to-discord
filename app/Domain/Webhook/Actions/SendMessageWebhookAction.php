@@ -6,6 +6,8 @@ use App\Api\Resources\WebhookResource;
 use App\Exceptions\ResourceNotFoundException;
 use Carbon\Carbon;
 use Domain\Webhook\Bags\DiscordBag;
+use Domain\Webhook\Models\Webhook;
+use Domain\Webhook\Models\WebhookHistorie;
 use Domain\Webhook\Repositories\WebhookRepository;
 use Frf\DiscordNotification\Services\DiscordService;
 use Illuminate\Support\Facades\Cache;
@@ -39,16 +41,13 @@ class SendMessageWebhookAction
                 return $webhook;
             });
 
-        $result = $this->processData(request()->all());
+        $discordBag = DiscordBag::fromRequest(request()->all());
 
-        $this->sendMessage($result, $webhook->my_webhook, $webhook->application);
+        $this->saveHistories($discordBag, $webhook);
+
+        $this->sendMessage($discordBag, $webhook->my_webhook, $webhook->application);
 
         return WebhookResource::make($webhook);
-    }
-
-    private function processData($request) : DiscordBag
-    {
-        return DiscordBag::fromRequest($request);
     }
 
     private function sendMessage(DiscordBag $discordBag, string $webhook, string $application) : void
@@ -62,7 +61,8 @@ class SendMessageWebhookAction
             ->send($webhook);
     }
 
-    private function description(DiscordBag $discordBag) : array {
+    private function description(DiscordBag $discordBag) : array
+    {
 
         if ($discordBag->type == 'push') {
             return [
@@ -100,5 +100,13 @@ class SendMessageWebhookAction
                 'Status: '. $discordBag->state
             ];
         }
+    }
+
+    private function saveHistories(DiscordBag $discordBag, Webhook $webhook): void
+    {
+        WebhookHistorie::create([
+            'content' => $discordBag->jsonAttributes(),
+            'webhook_id' => $webhook->id
+        ]);
     }
 }
