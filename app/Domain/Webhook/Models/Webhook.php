@@ -20,6 +20,7 @@ class Webhook extends Model
         'content',
         'webhook_hash',
         'user_id',
+        'my_webhook',
     ];
 
     protected $hidden = [

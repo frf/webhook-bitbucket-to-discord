@@ -28,7 +28,7 @@ class SendMessageWebhookAction
     {
         $cacheKey = 'webhook:message:'.md5($id);
 
-        return Cache::tags(['webhook_message'])
+        $webhook = Cache::tags(['webhook_message'])
             ->remember($cacheKey, 3600, function () use ($id) {
                 $webhook = $this->webhookRepository->findByHash($id);
 
@@ -36,12 +36,14 @@ class SendMessageWebhookAction
                     throw new ResourceNotFoundException();
                 }
 
-                $result = $this->processData(request()->all());
-
-                $this->sendMessage($result, $webhook->my_webhook, $webhook->application);
-
-                return WebhookResource::make($webhook);
+                return $webhook;
             });
+
+        $result = $this->processData(request()->all());
+
+        $this->sendMessage($result, $webhook->my_webhook, $webhook->application);
+
+        return WebhookResource::make($webhook);
     }
 
     private function processData($request) : DiscordBag
@@ -53,15 +55,50 @@ class SendMessageWebhookAction
     {
         $this->discordService
             ->title('Alert! - ' . $application . ' | ' . $discordBag->type)
-            ->description([
-                $discordBag->repository_full_name,
-                $discordBag->display_name,
-                $discordBag->branch_name,
-                $discordBag->summary,
-            ])
+            ->description($this->description($discordBag))
             ->footer('Time: ')
             ->success()
             ->timestamp(Carbon::now())
             ->send($webhook);
+    }
+
+    private function description(DiscordBag $discordBag) : array {
+
+        if ($discordBag->type == 'push') {
+            return [
+                'Repository: ' . $discordBag->repository,
+                'Actor: ' . $discordBag->actor,
+                $discordBag->branch_name,
+                $discordBag->summary,
+            ];
+        }
+
+        if ($discordBag->type == 'pullrequest') {
+            return [
+                'Repository: ' .$discordBag->repository,
+                'Actor: ' . $discordBag->actor,
+                'PullRequest: '. $discordBag->source . ' => ' . $discordBag->destination,
+                '',
+                $discordBag->summary,
+            ];
+        }
+
+        if ($discordBag->type == 'pullrequest' && $discordBag->approval != null) {
+            return [
+                'Repository: ' .$discordBag->repository,
+                'Approved: ' . $discordBag->approval,
+                'PullRequest: '. $discordBag->source . ' => ' . $discordBag->destination,
+                '',
+                $discordBag->summary,
+            ];
+        }
+
+        if ($discordBag->type == 'commit_status') {
+            return [
+                'Repository: ' . $discordBag->repository,
+                'Actor: ' . $discordBag->actor,
+                'Status: '. $discordBag->state
+            ];
+        }
     }
 }
