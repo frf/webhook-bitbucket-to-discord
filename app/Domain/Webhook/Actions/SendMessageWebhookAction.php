@@ -106,7 +106,8 @@ class SendMessageWebhookAction
     {
         WebhookHistorie::create([
             'content' => $discordBag->jsonAttributes(),
-            'webhook_id' => $webhook->id
+            'webhook_id' => $webhook->id,
+            'content_original' => (request()->expectsJson()) ? request()->all() : null
         ]);
     }
 }

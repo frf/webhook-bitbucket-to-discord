@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int id
  * @property int webhook_id
  * @property string content
+ * @property string content_original
  */
 class WebhookHistorie extends Model
 {
@@ -18,6 +19,7 @@ class WebhookHistorie extends Model
     protected $fillable = [
         'content',
         'webhook_id',
+        'content_original',
     ];
 
     protected $hidden = [
@@ -27,5 +29,6 @@ class WebhookHistorie extends Model
     ];
 
     protected $casts = [
+        'content_original' => 'array',
     ];
 }
