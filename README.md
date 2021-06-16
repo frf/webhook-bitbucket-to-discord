@@ -1,34 +1,61 @@
-<h4 align="center">
-</h4>
+# Webhook Bitbucket Discord
 
-<p align="center">
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/frf/webhook-bitbucket-to-discord.svg">
-  <a href="https://github.com/frf/webhook-bitbucket-to-discord/commits/master">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/frf/webhook-bitbucket-to-discord.svg">
-  </a>
+Integrator Bitbucket => Discord
 
-  <a href="https://github.com/frf/webhook-bitbucket-to-discord/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/frf/webhook-bitbucket-to-discord.svg">
-  </a>
+## Register
+To use you need to register
 
-  <img alt="GitHub" src="https://img.shields.io/github/license/frf/webhook-bitbucket-to-discord.svg">
-</p>
+/auth/register
+```json
+{
+    "name": "User  Name",
+    "mobile_phone": "2199992222",
+    "email": "email@email.com.br",
+    "password": "123456"
+}
+```
 
-<p align="center">
-  <a href="#frf">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-license">License</a>
-</p>
+After Register
 
-## :computer: Technologies
-This project was developed with the following technologies:
+GET: /webhooks
 
-- [Laravel](https://laravel.com/)
+```json
+{
+    "data": [
+        {
+            "key": "e58b09bac772c618dad10ad84a666614",
+            "webhook": "https://webhook.app2u.co/v1/webhook-message/e58b09xxxx",
+            "content": "Teste app2u",
+            "application": "bitbucket",
+            "my_webhook": "https://discord.com/api/webhooks/8453xxx9BymKxrE2M4XVQ9OisdcAbEfcRbsgVSfjIjcEsdEZI-13lmhKhr",
+            "created_at": "2021-05-21T21:29:07.000000Z"
+        },
+    ]
+}
+```
 
-## :memo: License
+POST: /webhooks
 
-This project is under the MIT license. See the [LICENSE](https://github.com/frf/webhook-bitbucket-to-discord/blob/master/LICENSE) for more information.
+```json
+{
+    "application": "bitbucket",
+    "webhook": "https://discord.com/api/webhooks/854716932351721532/dasdsadsZ99BAFex6xJgEU",
+    "content": "FrontEnd"
+}
+```
 
----
+PATCH: /webhooks/<key>
 
-Made with ♥ by Fabio Farias :wave: [Get in touch!](https://linkedin.com/in/fabiorochafarias/)
-[laravel]: https://laravel.com
+```json
+{
+    "webhook": "https://discord.com/api/webhooks/837790871847436288/ZYdF3af7fBa9fY-sRExxxgc"
+}
+```
+
+Configure bitbucket webhook
+
+After generate your webhook exemple (https://webhook.app2u.co/v1/webhook-message/e58b09xxxx)
+
+Use in:
+![alt text](https://github.com/frf/images-apps/blob/main/discord-message/bitbucket.png?raw=true)
+
