@@ -20,7 +20,6 @@ class CreateWebhookRequest extends FormRequest
     {
         return [
             'webhook' => 'required',
-            'user_id' => 'required|exists:users,id',
             'content' => 'required',
             'application' => 'required',
         ];

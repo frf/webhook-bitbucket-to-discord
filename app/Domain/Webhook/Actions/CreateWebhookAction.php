@@ -9,6 +9,7 @@ use Domain\User\Repositories\UserRepository;
 use Domain\Webhook\Bags\WebhookBag;
 use Domain\Webhook\Models\Webhook;
 use Domain\Webhook\Repositories\WebhookRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class CreateWebhookAction
@@ -31,9 +32,11 @@ class CreateWebhookAction
             unset($data['webhook']);
         }
 
+        $data['user_id'] = Auth::user()->getAuthIdentifier();
+
         $webhook = $this->webhookRepository->create($data);
         $webhook->webhook_hash = $this->webhookRepository
-            ->generateWebhook($webhook->id, $webhook->user_id);
+            ->generateWebhook($webhook->id, $data['user_id']);
         $webhook->save();
 
         return $this->webhookRepository->find($webhook->id);
