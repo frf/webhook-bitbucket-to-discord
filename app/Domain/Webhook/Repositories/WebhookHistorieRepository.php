@@ -20,6 +20,7 @@ class WebhookHistorieRepository extends Repository
         $this->applyCriteria();
         return QueryBuilder::for($this->model)
             ->where('webhook_id', $webhook->getKey())
+            ->orderBy('created_at', 'DESC')
             ->paginate($this->perPage);
     }
 
