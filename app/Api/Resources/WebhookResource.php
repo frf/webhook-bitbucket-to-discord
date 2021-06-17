@@ -21,6 +21,7 @@ class WebhookResource extends JsonResource
             'application' => $this->application,
             'my_webhook' => $this->my_webhook,
             'created_at' => $this->created_at,
+            'histories' => WebhookHistorieResource::collection($this->whenLoaded('histories'))
         ];
     }
 }

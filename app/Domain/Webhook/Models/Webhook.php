@@ -31,4 +31,10 @@ class Webhook extends Model
 
     protected $casts = [
     ];
+
+
+    public function histories()
+    {
+        return $this->hasMany(WebhookHistorie::class);
+    }
 }

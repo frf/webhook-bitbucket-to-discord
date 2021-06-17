@@ -33,6 +33,16 @@ class WebhookRepository extends Repository
     {
         $this->applyCriteria();
         return QueryBuilder::for($this->model)
+            ->allowedIncludes(['histories'])
+            ->where('webhook_hash', $id)
+            ->first();
+    }
+
+    public function findHistoriesByHash($id)
+    {
+        $this->applyCriteria();
+        return QueryBuilder::for($this->model)
+            ->allowedIncludes(['histories'])
             ->where('webhook_hash', $id)
             ->first();
     }

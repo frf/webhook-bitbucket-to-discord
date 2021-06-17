@@ -9,8 +9,13 @@ Route::prefix('webhooks')->middleware(['auth:api','user_context'])
             ->name('webhooks.index');
 
         Route::get('/{id}', [WebhookController::class, 'show'])
-            ->name('webhooks.show')
-            ->where('id', '[0-9]+');
+            ->name('webhooks.show');
+
+        Route::get('/{id}/histories', [WebhookController::class, 'histories'])
+            ->name('webhooks.histories');
+
+        Route::get('/histories/{id}', [WebhookController::class, 'historieShow'])
+            ->name('webhooks.histories.show');
 
         Route::post('/', [WebhookController::class, 'create'])
             ->name('webhooks.create');

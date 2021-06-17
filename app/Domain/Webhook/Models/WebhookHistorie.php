@@ -30,5 +30,6 @@ class WebhookHistorie extends Model
 
     protected $casts = [
         'content_original' => 'array',
+        'content' => 'array',
     ];
 }
