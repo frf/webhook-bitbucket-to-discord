@@ -2,7 +2,7 @@
 
 Integrator Bitbucket => Discord
 
-#### https://webhok.app2u.co
+#### https://webhook.app2u.co
 
 ## Register
 To use you need to register
