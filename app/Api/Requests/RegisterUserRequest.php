@@ -22,7 +22,7 @@ class RegisterUserRequest extends FormRequest
             'name' => 'required|string|between:5,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|min:6',
-            'mobile_phone' => 'required',
+            'mobile_phone' => 'sometimes',
         ];
     }
 }
